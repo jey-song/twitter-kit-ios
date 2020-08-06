@@ -130,6 +130,13 @@ static const UIEdgeInsets kComposeTextViewTextContainerInsets = {.top = 8, .left
     _textViewHeightConstraint.active = YES;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    // Fix Bug: 初始文字多于3行时，显示不全
+    [self _tseui_updateLineCount];
+}
+
 - (void)updateConstraints
 {
     dispatch_once(&_containerConstraintsToken, ^{
